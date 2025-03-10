@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Котики</title>
+  <style>
+    .cats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .cat-card {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .cat-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .cat-card h3 {
+      margin: 10px 0 5px;
+    }
+    .cat-card p {
+      font-size: 14px;
+    }
+    .favourite {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<h1 style="text-align: center;">Наши котики</h1>
+
+<div class="cats-container" id="catsContainer"></div>
+
+<script src="./cats.js"></script>
+<script>
+  const container = document.getElementById('catsContainer');
+
+  cats.forEach(cat => {
+    const card = document.createElement('div');
+    card.classList.add('cat-card');
+
+    const img = document.createElement('img');
+    img.src = cat.img_link;
+    img.alt = cat.name;
+
+    const name = document.createElement('h3');
+    name.textContent = cat.name;
+
+    const age = document.createElement('p');
+    age.textContent = `Возраст: ${cat.age} лет`;
+
+    const rate = document.createElement('p');
+    rate.textContent = `Оценка: ${cat.rate}/10`;
+
+    const desc = document.createElement('p');
+    desc.textContent = cat.description;
+
+    if (cat.favourite) {
+      const fav = document.createElement('p');
+      fav.textContent = '★ Любимчик!';
+      fav.classList.add('favourite');
+      card.appendChild(fav);
+    }
+
+    card.appendChild(img);
+    card.appendChild(name);
+    card.appendChild(age);
+    card.appendChild(rate);
+    card.appendChild(desc);
+
+    container.appendChild(card);
+  });
+</script>
+
+</body>
+</html>
